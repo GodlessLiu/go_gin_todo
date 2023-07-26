@@ -1,4 +1,4 @@
-module gin_todolist
+module go_gin_todo
 
 go 1.20
 
