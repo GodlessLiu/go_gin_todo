@@ -14,7 +14,7 @@ import (
 var db *gorm.DB
 
 func initDb() (err error) {
-	dsn := "root:123456789@tcp(127.0.0.1:3306)/db?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:123456@tcp(127.0.0.1:3306)/db?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	return err
 }
@@ -85,6 +85,7 @@ func updateTodoHandler(ctx *gin.Context) {
 			"code":    0,
 			"message": "参数错误",
 		})
+		return
 	}
 	if err := db.First(&Todo{}, todo.ID).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
